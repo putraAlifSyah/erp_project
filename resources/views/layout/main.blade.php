@@ -56,9 +56,9 @@
                             <li>
                                 <a href="/bahan"> <i class="menu-icon fa fa-calendar"></i>bahan</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="/sales"> <i class="menu-icon fa fa-calendar"></i>Sales</a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="/inventory"> <i class="menu-icon fa fa-calendar"></i>Inventory</a>
                             </li>
@@ -75,6 +75,14 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><a href="/rfq">RFQ</a></li>
                             <li><a href="/po">PO</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Sales</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><a href="/customer">Customer</a></li>
+                            <li><a href="/quotation">Quotation</a></li>
+                            <li><a href="/invoice">Invoice</a></li>
                         </ul>
                     </li>
                     <li>

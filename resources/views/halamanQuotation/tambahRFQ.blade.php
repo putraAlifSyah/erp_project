@@ -48,7 +48,7 @@
 
         <div class="form-group">
             <label for="satuan">Nama Bahan</label>
-            <select name="id0" class="form-control" id="bahanbahan">
+            <select name="id" class="form-control" id="bahanbahan">
                 <option value="">-- pilih --</option>
                 @foreach($bahan as $data)
                     <option value="{{ $data->id }}">{{ $data->nama_bahan }}</option>
@@ -65,7 +65,7 @@
         </div>
         
         <input type="hidden" class="form-control" id="vendor" name="harga_total" value="{{ old('vendor') }}">
-        <input type="text" class="form-control" id="jumlahTambah" name="jumlahTambah2" value="">
+        <input type="hidden" class="form-control" id="vendor" name="id_bahan" value="{{ old('vendor') }}">
         <td><a type="button" name="add" id="add" class="btn btn-success">Add More</a></td>  
   
         @foreach($errors->all() as $error)
@@ -84,10 +84,11 @@
         var disp = document.getElementById("bahantambahan");
         
         $("#add").click(function(){
-            i++;
-            $('#jumlahTambah').attr('value', i);
+            ++i;
             $('#bahanbahan').clone().attr('name', `id${i}`).appendTo('.tempatNassmbah'); // append to where you want
-            $(".tempatNassmbah").append('<input type="text" name="quantity'+i+'" class="form-control mb-4 mt-4"/>');
+            $(".tempatNassmbah")
+            .append('<input type="text" name="addmore['+i+'][quantity]" placeholder="Enter your Name" class="form-control mb-4 mt-4"/>');
+            disp.setAttribute("value", i);
         });
 
         $(document).on('click', '.remove-tr', function(){  

@@ -126,6 +126,30 @@ Route::get('/manufakturingorder/{manufakturingorder}/edit', 'ManufakturingOrderC
 Route::patch('/manufakturingorder/{manufakturingorder}', 'ManufakturingOrderController@update');
 
 
+// costumer
+Route::get('/customer', 'CustomerController@index');
+Route::get('/customer/tambah', 'CustomerController@create');
+Route::post('/customer', 'CustomerController@store');
+Route::delete('/customer/{customer}', 'CustomerController@destroy');
+Route::get('/customer/{customer}/edit', 'CustomerController@edit');
+Route::patch('/customer/{customer}', 'CustomerController@update');
+
+// quotation
+Route::get('/quotation', 'quotationController@index');
+Route::get('/quotation/tambah', 'quotationController@create');
+Route::post('/quotation', 'quotationController@store');
+Route::delete('/quotation/{quotation}', 'quotationController@destroy');
+Route::get('/quotation/{quotation}/edit', 'quotationController@edit');
+Route::patch('/quotation/{quotation}', 'quotationController@update');
+
+// invoicing
+Route::get('/invoicing', 'invoicingController@index');
+Route::get('/invoicing/tambah', 'invoicingController@create');
+Route::post('/invoicing', 'invoicingController@store');
+Route::delete('/invoicing/{invoicing}', 'invoicingController@destroy');
+Route::get('/invoicing/{invoicing}/edit', 'invoicingController@edit');
+Route::patch('/invoicing/{invoicing}', 'invoicingController@update');
+
 // Route::get('/produksi', 'produksiController@index');
 // Route::get('/produksi/tambah', 'produksiController@create');
 // Route::post('/produksi', 'produksiController@store');

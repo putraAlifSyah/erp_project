@@ -53,7 +53,7 @@ class RFQController extends Controller
 
      public function index()
     {
-        $data=rfq::whereNotIn('status', ['PO']);
+        $data=rfq::all();
         $dataVendor=vendor::all();
         return view ('/halamanRFQ/index', [
             'data'=>$data,
@@ -86,6 +86,7 @@ class RFQController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         // $request->validate([
         //     'addmore.*.quantity' => 'required',
         // ]);
@@ -95,11 +96,11 @@ class RFQController extends Controller
         //     // ProductStock::create($value);
         // }
 
-        $bahan = bahan::where('id', $request->id)->first();
+        $bahan = bahan::where('id', $request->id0)->first();
         $idbahan = $bahan->id;
         $harga = $bahan->harga*$request->quantity;
         // dd($bahan->harga);
-        if ($request->bahantambahan < 1) {
+        if (!$request->id1) {
             rfq::create([
                 'id_vendor' => $request->id_vendor,
                 'tanggal_order' => $request->tanggal_order,
@@ -112,36 +113,38 @@ class RFQController extends Controller
             // rfq::create($request->all());
             return redirect('/rfq')->with ('status', 'Data telah berhasil ditambahkan');
         }
-        // dd($id2);
-        // dd($request->$id2);
-        $index = 0;
-        $bahan = bahan::where('id', $request->id)->first();
-        $idbahan = $bahan->id;
-        $harga = $bahan->harga*$request->quantity;
-        rfq::create([
-            'id_vendor' => $request->id_vendor,
-            'tanggal_order' => $request->tanggal_order,
-            'id' => $idbahan,
-            'quantity' => $request->quantity,
-            'id_bahan' => $idbahan,
-            'harga_total' => $harga*1000,
-            'status' => 'rfq',
-        ]);
-        foreach ($request->addmore as $key => $value) {
-            $index++;
-            $id2 = "id".($index);
-            $bahan = bahan::where('id', $request->$id2)->first();
-            $idbahan = $bahan->id;
-            $harga = $bahan->harga*$request->quantity;
+        else{
             rfq::create([
                 'id_vendor' => $request->id_vendor,
                 'tanggal_order' => $request->tanggal_order,
-                'id' => $request->$id2,
-                'quantity' => $value['quantity'],
+                'id' => $idbahan,
+                'quantity' => $request->quantity,
                 'id_bahan' => $idbahan,
                 'harga_total' => $harga*1000,
                 'status' => 'rfq',
             ]);
+
+            $index = 0;
+            $bahan = bahan::where('id', $request->id0)->first();
+            $idbahan = $bahan->id;
+            $harga = $bahan->harga*$request->quantity;
+            for ($i=1; $i <= $request->jumlahTambah2; $i++) { 
+                $nameAtt='quantity'.$i;
+                $index++;
+                $id2 = "id".($index);
+                $bahan = bahan::where('id', $request->$id2)->first();
+                $idbahan = $bahan->id;
+                $harga = $bahan->harga*$request->quantity;
+                rfq::create([
+                    'id_vendor' => $request->id_vendor,
+                    'tanggal_order' => $request->tanggal_order,
+                    'id' => $request->$id2,
+                    'quantity' => $request->$nameAtt,
+                    'id_bahan' => $request->id.$i,
+                    'harga_total' => $harga*1000,
+                    'status' => 'rfq',
+                ]);
+            }
         }
         return redirect('/rfq')->with ('status', 'Data telah berhasil ditambahkan');
     }
