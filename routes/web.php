@@ -140,6 +140,7 @@ Route::get('/quotation/tambah', 'quotationController@create');
 Route::post('/quotation', 'quotationController@store');
 Route::delete('/quotation/{quotation}', 'quotationController@destroy');
 Route::get('/quotation/{quotation}/edit', 'quotationController@edit');
+Route::get('/quotation/{quotation}/confirm', 'quotationController@confirm');
 Route::patch('/quotation/{quotation}', 'quotationController@update');
 
 // invoicing
@@ -149,6 +150,14 @@ Route::post('/invoicing', 'invoicingController@store');
 Route::delete('/invoicing/{invoicing}', 'invoicingController@destroy');
 Route::get('/invoicing/{invoicing}/edit', 'invoicingController@edit');
 Route::patch('/invoicing/{invoicing}', 'invoicingController@update');
+
+// sales order
+Route::get('/sales_order', 'SalesOrderController@index');
+Route::get('/sales_order/tambah', 'SalesOrderController@create');
+Route::post('/sales_order', 'SalesOrderController@store');
+Route::delete('/sales_order/{sales_order}', 'SalesOrderController@destroy');
+Route::get('/sales_order/{sales_order}/edit', 'SalesOrderController@edit');
+Route::patch('/sales_order/{sales_order}', 'SalesOrderController@update');
 
 // Route::get('/produksi', 'produksiController@index');
 // Route::get('/produksi/tambah', 'produksiController@create');

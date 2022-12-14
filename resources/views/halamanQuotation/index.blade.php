@@ -35,17 +35,18 @@
         <strong>Data bahan</strong>
     </div>
     <div class="pull-right">
-        <a href="/rfq/tambah" class="btn-sm btn-success rounded mb-5">Tambah Data</a>
+        <a href="/quotation/tambah" class="btn-sm btn-success rounded mb-5">Tambah Data</a>
     </div>
     <table class="table table-striped" id="myTable">
     <thead class="table-dark">
         <tr>
             <th>No</th>
-            <th>Nama Vendor</th>
-            <th>Tanggal Order</th>
-            <th>Nama Bahan</th>
-            <th>Quantity</th>
-            <th>Harga Satuan</th>
+            <th>Kode Order</th>
+            <th>Customer</th>
+            <th>Expired</th>
+            <th>Batas Pembayaran</th>
+            <th>Produk</th>
+            <th>QTY</th>
             <th>Total</th>
             <th>Status</th>
             <th>Aksi</th>
@@ -56,27 +57,18 @@
     @foreach($data as $data)
         <tr class="text=center" rowspan="3">
             <td>{{$loop->iteration}}</td>
-            <td class="vendor">{{$data->Panggilvendor['nama_vendor'] }}</td>
-            <td>{{$data->tanggal_order}}</td>
-            <td>{{$data->Panggil_nama_bahan['nama_bahan']}}</td>
-            <td>{{$data->quantity}}</td>
-            <td>Rp. {{$data->Panggil_harga_satuan['harga']}}/{{ $data->Panggil_harga_satuan['value']}} {{ $data->Panggil_harga_satuan['satuan'] }}</td>
-            @php
-                $totalKeseluruhan += $data->harga_total
-            @endphp
-            <input type="hidden" value="{{ $totalKeseluruhan }}">
-            <td>Rp. {{$data->harga_total}}</td>
+            <td>{{$data->kode_order}}</td>
+            <td class="vendor">{{$data->PanggilCustomer['nama_customer'] }}</td>
+            <td>{{$data->expired}}</td>
+            <td>{{$data->batas_pembayaran}}</td>
+            <td>{{$data->PanggilProduk['nama_produk']}}</td>
+            <td>{{$data->qty}}</td>
+            <td>{{$data->sub_total}}</td>
             <td>{{$data->status}}</td>
             <td>
                 <div class="card-body">
-                    <a href="bahan/{{$data->id}}/edit" class="btn-sm btn-primary rounded tombol">Ubah</a>
+                    <a href="quotation/{{$data->id}}/confirm" class="btn-sm btn-primary rounded tombol">Confirm</a>
                     {{-- <a href="rfq/confirm/{{$data->id_rfq}}" class="btn-sm btn-warning rounded tombol">Confirm</a> --}}
-                    <form action="/bahan/{{$data->id}}" method="post" class="ini">
-                        @method('delete')
-                        @csrf
-                        <button type="submit" class="btn-xs btn-danger rounded" onclick="return confirm('Are you sure?')" style="font-size:13.5px">Hapus</buton>          
-                        </form> 
-                        <div class="clear"></div>
                 </div>
             </td>
         </tr>
@@ -86,16 +78,7 @@
     </tbody>
     </table>
     <div class="input-group mb-3">
-        <form action="/rfq/filter" style="display: flex" method="get"> 
-        {{-- @csrf --}}
-        <select name="filter" class="form-control mb-1 mr-2" id="filter" style="display: inline">
-            <option value="">Pilih Vendor</option>
-                @foreach ($dataVendor as $item)
-                    <option value="{{ $item->id_vendor }}">{{ $item->nama_vendor }}</option>
-                @endforeach
-        </select>
-        <button class="btn-sm btn-outline-secondary rounded mt-0.5" type="submit" id="button-addon2" style="height: 35px">Submit</button>
-        </form>
+
     </div>
     </div>
     </div>

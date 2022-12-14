@@ -25,40 +25,51 @@
 
 @section('konten')
 <!-- <div class="container"> -->
-<form method="post" action="/rfq">
+<form method="post" action="/quotation">
    @csrf
    <!-- name adalah hal yang penting, sesuaikan dengan database -->
    <div class="card-body">
    <div class="row">
    <div class="col-md-4 offset-md-4" id="tempatNambah">    
+
         <div class="form-group">
-            <label for="id_vendor">Pilih Vendor</label>
-            <select name="id_vendor" class="form-control" id="id_vendor">
+            <label for="kode_order">Kode Order</label>
+            <input type="text" class="form-control" id="kode_order" name="kode_order" value="{{ old('kode_order') }}">
+        </div>
+
+        <div class="form-group">
+            <label for="id_customer">Pilih Customer</label>
+            <select name="id_customer" class="form-control" id="id_customer">
                 <option value="">-- pilih --</option>
-                @foreach($vendor as $data)
-                    <option value="{{ $data->id_vendor }}">{{ $data->nama_vendor }}</option>
+                @foreach($customer as $data)
+                    <option value="{{ $data->id_customer }}">{{ $data->nama_customer }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label for="value">Tanggal Order</label>
-            <input type="date" class="form-control" id="value" name="tanggal_order" value="{{ old('value') }}">
+            <label for="expired">Expired</label>
+            <input type="date" class="form-control" id="expired" name="expired" value="{{ old('expired') }}">
+        </div>
+        
+        <div class="form-group">
+            <label for="batas_pembayaran">Waktu Pembayaran</label>
+            <input type="date" class="form-control" id="batas_pembayaran" name="batas_pembayaran" value="{{ old('batas_pembayaran') }}">
         </div>
 
         <div class="form-group">
-            <label for="satuan">Nama Bahan</label>
-            <select name="id" class="form-control" id="bahanbahan">
+            <label for="id_produk">Nama Produk</label>
+            <select name="id_produk" class="form-control" id="id_produk">
                 <option value="">-- pilih --</option>
-                @foreach($bahan as $data)
-                    <option value="{{ $data->id }}">{{ $data->nama_bahan }}</option>
+                @foreach($produk as $data)
+                    <option value="{{ $data->id_produk }}">{{ $data->nama_produk }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label for="quantity">Quantity</label>
-            <input type="text" class="form-control" id="quantity" name="quantity" value="{{ old('quantity') }}">
+            <label for="qty">Quantity</label>
+            <input type="text" class="form-control" id="qty" name="qty" value="{{ old('qty') }}">
         </div>
         <div class="tempatNassmbah">
 
@@ -66,6 +77,7 @@
         
         <input type="hidden" class="form-control" id="vendor" name="harga_total" value="{{ old('vendor') }}">
         <input type="hidden" class="form-control" id="vendor" name="id_bahan" value="{{ old('vendor') }}">
+        <input type="hidden" class="form-control" id="jumlahTambah" name="jumlahTambah2" value="">
         <td><a type="button" name="add" id="add" class="btn btn-success">Add More</a></td>  
   
         @foreach($errors->all() as $error)
@@ -84,11 +96,10 @@
         var disp = document.getElementById("bahantambahan");
         
         $("#add").click(function(){
-            ++i;
-            $('#bahanbahan').clone().attr('name', `id${i}`).appendTo('.tempatNassmbah'); // append to where you want
-            $(".tempatNassmbah")
-            .append('<input type="text" name="addmore['+i+'][quantity]" placeholder="Enter your Name" class="form-control mb-4 mt-4"/>');
-            disp.setAttribute("value", i);
+            i++;
+            $('#jumlahTambah').attr('value', i);
+            $('#id_produk').clone().attr('name', `id${i}`).appendTo('.tempatNassmbah'); // append to where you want
+            $(".tempatNassmbah").append('<input type="text" name="quantity'+i+'" class="form-control mb-4 mt-4"/>');
         });
 
         $(document).on('click', '.remove-tr', function(){  

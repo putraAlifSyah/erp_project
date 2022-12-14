@@ -82,7 +82,7 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><a href="/customer">Customer</a></li>
                             <li><a href="/quotation">Quotation</a></li>
-                            <li><a href="/invoice">Invoice</a></li>
+                            <li><a href="/sales_order">Sales Order</a></li>
                         </ul>
                     </li>
                     <li>

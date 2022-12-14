@@ -86,16 +86,6 @@ class RFQController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        // $request->validate([
-        //     'addmore.*.quantity' => 'required',
-        // ]);
-
-        // foreach ($request->addmore as $key => $value) {
-        //     dd($value);
-        //     // ProductStock::create($value);
-        // }
-
         $bahan = bahan::where('id', $request->id0)->first();
         $idbahan = $bahan->id;
         $harga = $bahan->harga*$request->quantity;
