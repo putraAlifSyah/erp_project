@@ -82,7 +82,7 @@ Route::get('/prosespesanan/{id_produksi}', 'prosesPesananController@proses');
 Route::get('/tambahBahanInventory/{id_produksi}', 'prosesPesananController@tambahkeInventory');
 
 // selesaikan pesanan
-Route::get('/selesai/{id_produksi}', 'prosesPesananController@selesai');
+Route::get('/selesai/{id_produksi}', 'prosesPesananController@selesai2');
 
 
 // Halaman vendor
@@ -144,12 +144,17 @@ Route::get('/quotation/{quotation}/confirm', 'quotationController@confirm');
 Route::patch('/quotation/{quotation}', 'quotationController@update');
 
 // invoicing
-Route::get('/invoicing', 'invoicingController@index');
-Route::get('/invoicing/tambah', 'invoicingController@create');
-Route::post('/invoicing', 'invoicingController@store');
-Route::delete('/invoicing/{invoicing}', 'invoicingController@destroy');
-Route::get('/invoicing/{invoicing}/edit', 'invoicingController@edit');
-Route::patch('/invoicing/{invoicing}', 'invoicingController@update');
+Route::get('/invoice', 'invoicingController@index');
+Route::get('/invoice/tambah', 'invoicingController@create');
+Route::post('/invoice', 'invoicingController@store');
+Route::delete('/invoice/{invoice}', 'invoicingController@destroy');
+Route::get('/invoice/{invoice}/edit', 'invoicingController@edit');
+Route::get('/invoice/{invoice}/confirm', 'invoicingController@confirm');
+Route::get('/invoice/{invoice}/post', 'invoicingController@post');
+Route::get('/invoice/{invoice}/paid', 'invoicingController@paid');
+Route::get('/invoice/{invoice}/validate', 'invoicingController@validasi');
+Route::post('/bayar', 'invoicingController@bayar');
+Route::patch('/invoice/{invoice}', 'invoicingController@update');
 
 // sales order
 Route::get('/sales_order', 'SalesOrderController@index');
@@ -157,7 +162,30 @@ Route::get('/sales_order/tambah', 'SalesOrderController@create');
 Route::post('/sales_order', 'SalesOrderController@store');
 Route::delete('/sales_order/{sales_order}', 'SalesOrderController@destroy');
 Route::get('/sales_order/{sales_order}/edit', 'SalesOrderController@edit');
+Route::get('/sales_order/{sales_order}/confirm', 'SalesOrderController@confirm');
 Route::patch('/sales_order/{sales_order}', 'SalesOrderController@update');
+
+// mo
+Route::get('/mo', 'ManufakturingOrderController@index');
+Route::get('/mo/tambah', 'ManufakturingOrderController@create');
+Route::post('/mo', 'ManufakturingOrderController@store');
+Route::delete('/mo/{mo}', 'ManufakturingOrderController@destroy');
+Route::get('/mo/{mo}/edit', 'ManufakturingOrderController@edit');
+Route::patch('/mo/{mo}', 'ManufakturingOrderController@update');
+
+
+// rekup costumer
+Route::get('/customerinvoice', 'costumerInvoicingController@index');
+Route::get('/customerinvoice/tambah', 'costumerInvoicingController@create');
+Route::post('/customerinvoice', 'costumerInvoicingController@store');
+Route::delete('/customerinvoice/{customerinvoice}', 'costumerInvoicingController@destroy');
+Route::get('/customerinvoice/{customerinvoice}/edit', 'costumerInvoicingController@edit');
+Route::patch('/customerinvoice/{customerinvoice}', 'costumerInvoicingController@update');
+
+
+
+
+
 
 // Route::get('/produksi', 'produksiController@index');
 // Route::get('/produksi/tambah', 'produksiController@create');

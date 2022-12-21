@@ -73,6 +73,17 @@ class prosesPesananController extends Controller
 
     }
 
+    public function selesai2(request $request)
+    {
+        produksi::where('id_produksi', $request->id_produksi)
+        ->update([
+                    'status'=>"Selesai",
+                ]);
+                
+        return redirect('/produksi')->with('status', 'Data telah berhasil diubah');
+
+    }
+
     public function index()
     {
         //

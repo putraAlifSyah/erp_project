@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class invoicing extends Model
 {
-    use HasFactory;
+    protected $guarded = ['created_at', 'updated_at'];
+    
+    public function PanggilCustomer(){
+        return $this->belongsTo('App\Models\customer','id_customer')->withDefault([
+            'id_customer'=>'tidak ada'
+        ]);    
+    }
+    public function PanggilProduk(){
+        return $this->belongsTo('App\Models\produk','id_produk')->withDefault([
+            'id_produk'=>'tidak ada'
+        ]);    
+    }
 }

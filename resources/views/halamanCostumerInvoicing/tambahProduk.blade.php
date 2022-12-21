@@ -25,35 +25,31 @@
 
 @section('konten')
 <!-- <div class="container"> -->
-<form method="post" action="/mo">
+<form method="post" action="/produk">
    @csrf
    <!-- name adalah hal yang penting, sesuaikan dengan database -->
    <div class="card-body">
    <div class="row">
    <div class="col-md-4 offset-md-4">
-
-        <input type="hidden" class="form-control" id="kode_order" name="kode_order" value="{{ $kode_order = date('h-i-s-') . mt_rand(100, 999); }}">
-        <input type="hidden" class="form-control" id="nama_customer" name="nama_customer" value="MO">
-        <input type="hidden" class="form-control" id="status" name="status" value="dalam antrian">
-
         <div class="form-group">
-            <label for="id_produk">Pilih Produk</label>
-            <select name="id_produk" class="form-control" id="id_produk">
-                <option value="">-- pilih --</option>
-                @foreach($produk as $data)
-                    <option value="{{ $data->id_produk }}">{{ $data->nama_produk }}</option>
-                @endforeach
-            </select>
+            <label for="kode_produk" class="col-xs-2 col-form-label">Kode Produk</label>
+            <input type="text" class="form-control" id="kode_produk" name="kode_produk" value="{{ old('kode_produk') }}">
         </div>
 
         <div class="form-group">
-            <label for="value">PCS</label>
-            <input type="text" class="form-control" id="value" name="value" value="{{ old('value') }}">
+            <label for="nama_produk">Nama Produk</label>
+            <input type="text" class="form-control" id="nama_produk" name="nama_produk" value="{{ old('nama_produk') }}">
         </div>
-        
-        @foreach($errors->all() as $error)
-        <li>{{$error}}</li>
-        @endforeach
+
+        <div class="form-group">
+            <label for="harga">Harga 1 pcs</label>
+            <input type="text" class="form-control" id="harga" name="harga" value="{{ old('harga') }}">
+        </div>
+
+        <div class="form-group">
+            <label for="keterangan_produk">Keterangan Produk</label>
+            <textarea type="text" class="form-control" id="keterangan_produk" name="keterangan_produk" value="{{ old('keterangan_produk') }}"></textarea>
+        </div>
     <button type="submit" class="btn btn-primary">Submit</button>
     </div>
     </div>

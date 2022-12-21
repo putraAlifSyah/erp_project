@@ -29,19 +29,20 @@
     <div class="card">
     <div class="card-body">
     <div class="pull-left" style="margin-bottom:10px">
-        <strong>Data Produksi</strong>
+        <strong>Data Produk</strong>
     </div>
     <div class="pull-right">
-        <a href="/mo/tambah" class="btn-sm btn-success rounded mb-5">Tambah Data</a>
+        <a href="/produk/tambah" class="btn-sm btn-success rounded mb-5">Tambah Data</a>
     </div>
     <table class="table table-striped">
     <thead class="table-dark">
         <tr>
             <th>No</th>
             <th>Kode Order</th>
-            <th>Nama Pemesan</th>
-            <th>Pesan Produk</th>
+            <th>Nama</th>
+            <th>Produk`</th>
             <th>QTY</th>
+            <th>Total Harga</th>
             <th>Status</th>
             <th>Aksi</th>
         </tr>
@@ -52,21 +53,19 @@
         <tr class="text=center">
             <td>{{$loop->iteration}}</td>
             <td>{{$data->kode_order}}</td>
-            <td>{{$data->nama_pemesan}}</td>
-            <td>{{$data->pesan_produk}}</td>
-            <td>{{$data->value}} pcs</td>
+            <td>{{$data->nama}}</td>
+            <td>{{$data->produk}}</td>
+            <td>{{$data->value}}</td>
+            <td>{{$data->harga}}</td>
             <td>{{$data->status}}</td>
             <td>
                 <div class="card-body">
-                    <a href="markastodo/{{$data->id_produksi}}" class="btn-sm btn-primary rounded tombol">Mark As Todo</a>
-                    <a href="cekBahan/{{$data->id_produksi}}" class="btn-sm btn-primary rounded tombol">Cek Bahan</a>
-                    <a href="prosespesanan/{{$data->id_produksi}}" class="btn-sm btn-primary rounded tombol">Proses</a>
-                    <a href="selesai/{{$data->id_produksi}}" class="btn-sm btn-primary rounded tombol">Selesai</a>
-                    {{-- <form action="/produk/{{$data->id_produk}}" method="post" class="ini">
+                    <a href="costumerinvoice/{{$data->id}}/edit" class="btn-sm btn-primary rounded tombol">Ubah</a>
+                    <form action="/costumerinvoice/{{$data->id}}" method="post" class="ini">
                         @method('delete')
                         @csrf
                         <button type="submit" class="btn-xs btn-danger rounded" onclick="return confirm('Are you sure?')" style="font-size:13.5px">Hapus</buton>          
-                    </form>  --}}
+                    </form> 
                     <div class="clear"></div>
                 </div>
             </td>
@@ -76,15 +75,12 @@
 
     </tbody>
     </table>
-    <div class="pull-right">
-        {{-- <a href="/produk/tambah" class="btn-sm btn-success rounded mb-5">Proses Order</a> --}}
-    </div>
     </div>
     </div>
     </div>
 <!-- </div> -->
 @if (session('status'))
-            <div class="alert alert-danger">
+            <div class="alert alert-success">
                 {{ session('status') }}
             </div>
         @endif

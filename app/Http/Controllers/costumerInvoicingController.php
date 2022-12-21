@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\costumerInvoicing;
 use Illuminate\Http\Request;
 
-class manufakturingController extends Controller
+class costumerInvoicingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,10 @@ class manufakturingController extends Controller
      */
     public function index()
     {
-        
+        $data=costumerInvoicing::all();
+        return view ('/halamanCostumerInvoicing/index', [
+            'data'=>$data,
+        ]);
     }
 
     /**
@@ -23,7 +27,7 @@ class manufakturingController extends Controller
      */
     public function create()
     {
-        return view('halamanSales/tambah');
+        //
     }
 
     /**

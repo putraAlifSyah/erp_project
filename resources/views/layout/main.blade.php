@@ -66,7 +66,7 @@
                                 <a href="/produksi"> <i class="menu-icon fa fa-calendar"></i>Produksi</a>
                             </li>
                             <li>
-                                <a href="/manufakturingorder"> <i class="menu-icon fa fa-calendar"></i>Manufakturing Order</a>
+                                <a href="/produksi"> <i class="menu-icon fa fa-calendar"></i>Manufakturing Order</a>
                             </li>
                         </ul>
                     </li>
@@ -88,6 +88,18 @@
                     <li>
                         <a href="/vendor"> <i class="menu-icon fa fa-calendar"></i>Vendor</a>
                     </li>
+                    <li>
+                        <a href="/invoice"> <i class="menu-icon fa fa-calendar"></i>Invoice</a>
+                    </li>
+
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Accounting</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><a href="/customerinvoice">Costumer Invoice</a></li>
+                            <li><a href="/vendorbill">Vendor Bill</a></li>
+                        </ul>
+                    </li>
+
                     {{-- <li>
                         <a href="/purchaseorder"> <i class="menu-icon fa fa-calendar"></i>Purchase Order</a>
                     </li> --}}

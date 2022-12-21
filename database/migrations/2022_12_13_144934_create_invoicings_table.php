@@ -14,13 +14,22 @@ class CreateInvoicingsTable extends Migration
     public function up()
     {
         Schema::create('invoicings', function (Blueprint $table) {
-            $table->id('id_invoice');
-            $table->string('customer');
-            $table->string('produk');
-            $table->string('qty');
-            $table->string('total');
+            $table->id();
+            $table->integer('kode_order');
+            $table->bigInteger('id_customer')->unsigned();
+            $table->date('expired');
+            $table->string('batas_pembayaran');
+            $table->integer('qty');
+            $table->bigInteger('id_produk')->unsigned();
+            $table->integer('sub_total');
             $table->string('status');
             $table->timestamps();
+        });
+        Schema::table('invoicings', function (Blueprint $table) {
+            $table->foreign('id_customer')->references('id_customer')->on('customers')->onUpdate('cascade');
+        });
+        Schema::table('invoicings', function (Blueprint $table) {
+            $table->foreign('id_produk')->references('id_produk')->on('produks')->onUpdate('cascade');
         });
     }
 

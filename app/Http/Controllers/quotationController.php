@@ -47,7 +47,7 @@ class quotationController extends Controller
                 'qty' => $jmlData[$i]['qty'],
                 'id_produk' => $jmlData[$i]['id_produk'],
                 'sub_total' => $jmlData[$i]['sub_total'],
-                'status' => 'Quotation',
+                'status' => 'To Invoice',
             ]);
         }
 

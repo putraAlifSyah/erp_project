@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\produk;
+use App\Models\produksi;
 use Illuminate\Http\Request;
 
-class manufakturingController extends Controller
+class ManufakturingOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,7 @@ class manufakturingController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -23,7 +25,10 @@ class manufakturingController extends Controller
      */
     public function create()
     {
-        return view('halamanSales/tambah');
+        $produk = produk::all();
+        return view('HalamanManufakturingOrder/tambahManufakturing',[
+            'produk' => $produk
+        ]);
     }
 
     /**
@@ -34,7 +39,17 @@ class manufakturingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pesan_produk = produk::where('id_produk', $request->id_produk)->first();
+        produksi::create([
+            'kode_order' => $request->kode_order,
+            'nama_pemesan' => $request->nama_customer,
+            'pesan_produk' => $pesan_produk->nama_produk,
+            'value' => $request->value,
+            'status' => 'Dalam Antrian',
+            'id_produk' => $request->id_produk,
+        ]);
+
+        return redirect('/produksi')->with ('status', 'Data telah berhasil ditambahkan');
     }
 
     /**

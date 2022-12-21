@@ -25,35 +25,33 @@
 
 @section('konten')
 <!-- <div class="container"> -->
-<form method="post" action="/mo">
+<form method="post" action="/bayar">
    @csrf
    <!-- name adalah hal yang penting, sesuaikan dengan database -->
    <div class="card-body">
    <div class="row">
    <div class="col-md-4 offset-md-4">
 
-        <input type="hidden" class="form-control" id="kode_order" name="kode_order" value="{{ $kode_order = date('h-i-s-') . mt_rand(100, 999); }}">
-        <input type="hidden" class="form-control" id="nama_customer" name="nama_customer" value="MO">
-        <input type="hidden" class="form-control" id="status" name="status" value="dalam antrian">
+    <div class="form-group">
+        <label for="Total_Pembayaran">Total Pembayaran</label>
+        <input type="text" class="form-control" id="Total_Pembayaran" name="Total_Pembayaran" value="{{ $total }}">
+    </div>
+
+    <div class="form-group">
+        <label for="cara_pembayaran">Pilih Pembayaran</label>
+        <select name="cara_pembayaran" class="form-control" id="cara_pembayaran">
+            <option value="">-- pilih --</option>
+                <option value="Cash">Cash</option>
+                <option value="Bank">Bank</option>
+        </select>
+    </div>
 
         <div class="form-group">
-            <label for="id_produk">Pilih Produk</label>
-            <select name="id_produk" class="form-control" id="id_produk">
-                <option value="">-- pilih --</option>
-                @foreach($produk as $data)
-                    <option value="{{ $data->id_produk }}">{{ $data->nama_produk }}</option>
-                @endforeach
-            </select>
+            <label for="bayar">Bayar</label>
+            <input type="text" class="form-control" id="bayar" name="bayar" value="{{ old('bayar') }}">
         </div>
 
-        <div class="form-group">
-            <label for="value">PCS</label>
-            <input type="text" class="form-control" id="value" name="value" value="{{ old('value') }}">
-        </div>
-        
-        @foreach($errors->all() as $error)
-        <li>{{$error}}</li>
-        @endforeach
+        <input type="hidden" value="{{ $kode_order }}" name='kode_order'>
     <button type="submit" class="btn btn-primary">Submit</button>
     </div>
     </div>
@@ -61,5 +59,10 @@
 </form>
     </tbody>
     </table>
+    @if (session('duplikat'))
+    <div class="alert alert-danger">
+        {{ session('duplikat') }}
+    </div>
+@endif  
 <!-- </div> -->
 @endsection     

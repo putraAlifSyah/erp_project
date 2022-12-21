@@ -41,11 +41,10 @@
     <thead class="table-dark">
         <tr>
             <th>No</th>
-            <th>Kode Order</th>
-            <th>Customer</th>
+            <th>Nama Customer</th>
+            <th>Produk</th>
             <th>Expired</th>
             <th>Batas Pembayaran</th>
-            <th>Produk</th>
             <th>QTY</th>
             <th>Total</th>
             <th>Status</th>
@@ -57,17 +56,26 @@
     @foreach($data as $data)
         <tr class="text=center" rowspan="3">
             <td>{{$loop->iteration}}</td>
-            <td>{{$data->kode_order}}</td>
             <td class="vendor">{{$data->PanggilCustomer['nama_customer'] }}</td>
+            <td>{{$data->PanggilProduk['nama_produk']}}</td>
             <td>{{$data->expired}}</td>
             <td>{{$data->batas_pembayaran}}</td>
-            <td>{{$data->PanggilProduk['nama_produk']}}</td>
             <td>{{$data->qty}}</td>
             <td>{{$data->sub_total}}</td>
             <td>{{$data->status}}</td>
             <td>
                 <div class="card-body">
-                    <a href="sales_order/{{$data->id}}/confirm" class="btn-sm btn-primary rounded tombol">Buat Invoice</a>
+                    @if ($data->status == 'Draft')
+                        <a href="invoice/{{$data->kode_order}}/post" class="btn-sm btn-primary rounded tombol">Post</a>
+                    @endif
+
+                    @if ($data->status == 'Posted')
+                        <a href="invoice/{{$data->kode_order}}/paid" class="btn-sm btn-success rounded tombol">Register Payment</a>
+                    @endif
+                    
+                    @if ($data->status == 'Paid')
+                        <a href="invoice/{{$data->kode_order}}/validate" class="btn-sm btn-warning rounded tombol">Validate</a>
+                    @endif
                     {{-- <a href="rfq/confirm/{{$data->id_rfq}}" class="btn-sm btn-warning rounded tombol">Confirm</a> --}}
                 </div>
             </td>
