@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\costumerInvoicing;
+use App\Models\customer;
 use App\Models\inventory;
 use App\Models\invoicing;
 use App\Models\produk;
@@ -47,14 +49,31 @@ class invoicingController extends Controller
     }
 
     public function bayar(Request $request){
+        $data_order = invoicing::where('kode_order', $request->kode_order)->get();
+        $nama_customer = customer::where('id_customer', $data_order[0]['id_customer'])->first();
+        
         if ($request->bayar < $request->Total_Pembayaran) {
             return back()->with('duplikat', 'Pembayaran Kurang');
         }
+        
+        for ($i=0; $i < count($data_order); $i++) {
+            $nama_produk = produk::where('id_produk', $data_order[$i]['id_produk'])->first();
+            // $nama_customer2 = $nama_customer[0]['nama_customer']
+            costumerInvoicing::create([
+                'kode_order' => $data_order[$i]['kode_order'],
+                'nama' => $nama_customer->nama_customer,
+                'produk' => $nama_produk->nama_produk,
+                'value' =>$data_order[$i]['qty'],
+                'harga' =>$data_order[$i]['sub_total'],
+                'tanggal' =>date('Y-m-d'),
+                'status' =>'Paid',
+            ]);
+        }
+        
         invoicing::where('kode_order', $request->kode_order)
         ->update([
             'status' => 'Paid',
         ]);
-
         // $data = invoicing::where('kode_order', $request->kode_order)->get();
         // for ($i=0; $i < count($data) ; $i++) { 
         //     $namaProduk = produk::where('id_produk', $data[$i]['id_produk'])->first();

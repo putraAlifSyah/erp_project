@@ -29,17 +29,17 @@
     <div class="card">
     <div class="card-body">
     <div class="pull-left" style="margin-bottom:10px">
-        <strong>Data Costumer Invoicing</strong>
+        <strong>Data Vendor Bill</strong>
     </div>
     <table class="table table-striped">
     <thead class="table-dark">
         <tr>
             <th>No</th>
-            <th>Kode Order</th>
-            <th>Nama</th>
-            <th>Produk`</th>
-            <th>QTY</th>
+            <th>Nama Vendor</th>
+            <th>Nama Bahan</th>
+            <th>Value</th>
             <th>Total Harga</th>
+            <th>Tanggal</th>
             <th>Status</th>
         </tr>
     </thead>
@@ -48,11 +48,11 @@
     @foreach($data as $data)
         <tr class="text=center">
             <td>{{$loop->iteration}}</td>
-            <td>{{$data->kode_order}}</td>
-            <td>{{$data->nama}}</td>
-            <td>{{$data->produk}}</td>
+            <td>{{$data->nama_vendor}}</td>
+            <td>{{$data->nama_bahan}}</td>
             <td>{{$data->value}}</td>
             <td>{{$data->harga}}</td>
+            <td>{{$data->tanggal}}</td>
             <td>{{$data->status}}</td>
             
         </tr>

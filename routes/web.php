@@ -182,7 +182,21 @@ Route::delete('/customerinvoice/{customerinvoice}', 'costumerInvoicingController
 Route::get('/customerinvoice/{customerinvoice}/edit', 'costumerInvoicingController@edit');
 Route::patch('/customerinvoice/{customerinvoice}', 'costumerInvoicingController@update');
 
+// rekup vendor bill
+Route::get('/vendorbill', 'vendorBillController@index');
+Route::get('/vendorbill/tambah', 'vendorBillController@create');
+Route::post('/vendorbill', 'vendorBillController@store');
+Route::delete('/vendorbill/{vendorbill}', 'vendorBillController@destroy');
+Route::get('/vendorbill/{vendorbill}/edit', 'vendorBillController@edit');
+Route::patch('/vendorbill/{vendorbill}', 'vendorBillController@update');
 
+Route::get('/pdf', 'pdfrouting@index');
+Route::get('/cetak', 'pdfrouting@cetak_pdf');
+Route::get('/invoice/{invoice}/cetak', 'pdfrouting@cetak_pdf');
+
+Route::get('/phpinfo', function() {
+    return phpinfo();
+});
 
 
 

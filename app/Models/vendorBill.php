@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class costumerInvoicing extends Model
+class vendorBill extends Model
 {
     protected $guarded = ['created_at', 'updated_at'];
 }

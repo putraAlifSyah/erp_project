@@ -7,6 +7,7 @@ use App\Models\produksi;
 use App\Models\purchaseOrder;
 use App\Models\rfq;
 use App\Models\vendor;
+use App\Models\vendorBill;
 use Illuminate\Http\Request;
 
 class POController extends Controller
@@ -76,9 +77,26 @@ class POController extends Controller
                 // 'kode_lembaga'=>$request->kode_lembaga,
                 'status' =>'Waiting To Bill'
             ]);
+            
             return redirect('/po'); 
         }
         if ($data->status === "Waiting To Bill") {
+
+            // awal
+            $data_order = purchaseOrder::where('nama_vendor', $request->namavendor)->get();
+                    
+            for ($i=0; $i < count($data_order); $i++) {
+                vendorBill::create([
+                    'nama_vendor' => $data_order[$i]['nama_vendor'],
+                    'nama_bahan' => $data_order[$i]['nama_bahan'],
+                    'value' => $data_order[$i]['qty'],
+                    'harga' =>$data_order[$i]['harga_total'],
+                    'tanggal' =>date('Y-m-d'),
+                    'status' =>'Full Billed',
+                ]);
+            }
+        // akhir
+
             purchaseOrder::where('nama_vendor', $request->namavendor)
             ->update([
                 // 'kode_lembaga'=>$request->kode_lembaga,

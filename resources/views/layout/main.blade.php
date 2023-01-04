@@ -96,7 +96,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Accounting</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><a href="/customerinvoice">Costumer Invoice</a></li>
-                            <li><a href="/vendorbill">Vendor Bill</a></li>
+                        <li><a href="/vendorbill">Vendor Bill</a></li>
                         </ul>
                     </li>
 

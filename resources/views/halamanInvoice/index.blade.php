@@ -41,6 +41,7 @@
     <thead class="table-dark">
         <tr>
             <th>No</th>
+            <th>Kode Order</th>
             <th>Nama Customer</th>
             <th>Produk</th>
             <th>Expired</th>
@@ -56,6 +57,7 @@
     @foreach($data as $data)
         <tr class="text=center" rowspan="3">
             <td>{{$loop->iteration}}</td>
+            <td>{{$data->kode_order}}</td>
             <td class="vendor">{{$data->PanggilCustomer['nama_customer'] }}</td>
             <td>{{$data->PanggilProduk['nama_produk']}}</td>
             <td>{{$data->expired}}</td>
@@ -75,6 +77,7 @@
                     
                     @if ($data->status == 'Paid')
                         <a href="invoice/{{$data->kode_order}}/validate" class="btn-sm btn-warning rounded tombol">Validate</a>
+                        <a href="invoice/{{$data->kode_order}}/cetak" class="btn-sm btn-warning rounded tombol">Cetak</a>
                     @endif
                     {{-- <a href="rfq/confirm/{{$data->id_rfq}}" class="btn-sm btn-warning rounded tombol">Confirm</a> --}}
                 </div>
