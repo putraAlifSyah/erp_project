@@ -29,7 +29,18 @@
     <div class="card">
     <div class="card-body">
     <div class="pull-left" style="margin-bottom:10px">
-        <strong>Data Vendor Bill</strong>
+        <form action="vendorbill/filter">
+            @if ($filter == false)
+                <label for="dari" style="margin-right: 15px"><b>From</b></label><input type="date" name="dari" id="dari">
+                <label for="sampai" style="margin-right: 15px; margin-left: 15px"><b>To</b></label><input type="date" name="sampai" id="sampai">
+                <button class="btn btn-primary">Submit</button>
+            @else
+                <label for="dari" style="margin-right: 15px"><b>From</b></label><input type="date" name="dari" id="dari" value="{{ $tanggalAwal }}">
+                <label for="sampai" style="margin-right: 15px; margin-left: 15px"><b>To</b></label><input type="date" name="sampai" id="sampai" value="{{ $tanggalAkhir }}">
+                {{-- <button class="btn btn-primary">Submit</button>     --}}
+                <a href='/vendorbill' class="btn btn-warning">Back</a>
+            @endif
+        </form>
     </div>
     <table class="table table-striped">
     <thead class="table-dark">

@@ -17,6 +17,21 @@ class costumerInvoicingController extends Controller
         $data=costumerInvoicing::all();
         return view ('/halamanCostumerInvoicing/index', [
             'data'=>$data,
+            'filter' => false,
+        ]);
+    }
+
+    public function filter(Request $request){
+        $data=costumerInvoicing::where('tanggal', '>=', $request->dari)
+        ->where('created_at', '<=', $request->sampai)
+        ->get();
+        $tanggalAwal = $request->dari;
+        $tanggalAkhir = $request->sampai;
+        return view ('/halamanCostumerInvoicing/index', [
+            'data'=>$data,
+            'tanggalAwal'=>$tanggalAwal,
+            'tanggalAkhir'=>$tanggalAkhir,
+            'filter' => true,
         ]);
     }
 

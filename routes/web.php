@@ -181,6 +181,7 @@ Route::post('/customerinvoice', 'costumerInvoicingController@store');
 Route::delete('/customerinvoice/{customerinvoice}', 'costumerInvoicingController@destroy');
 Route::get('/customerinvoice/{customerinvoice}/edit', 'costumerInvoicingController@edit');
 Route::patch('/customerinvoice/{customerinvoice}', 'costumerInvoicingController@update');
+Route::get('/customerinvoice/filter', 'costumerInvoicingController@filter');
 
 // rekup vendor bill
 Route::get('/vendorbill', 'vendorBillController@index');
@@ -189,6 +190,7 @@ Route::post('/vendorbill', 'vendorBillController@store');
 Route::delete('/vendorbill/{vendorbill}', 'vendorBillController@destroy');
 Route::get('/vendorbill/{vendorbill}/edit', 'vendorBillController@edit');
 Route::patch('/vendorbill/{vendorbill}', 'vendorBillController@update');
+Route::get('/vendorbill/filter', 'vendorBillController@filter');
 
 Route::get('/pdf', 'pdfrouting@index');
 Route::get('/cetak', 'pdfrouting@cetak_pdf');

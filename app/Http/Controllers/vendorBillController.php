@@ -17,9 +17,26 @@ class vendorBillController extends Controller
         $data=vendorBill::all();
         return view ('/halamanVendorBill/index', [
             'data'=>$data,
+            'filter' => false,
         ]);
         
     }
+
+
+    public function filter(Request $request){
+        $data=vendorBill::where('tanggal', '>=', $request->dari)
+        ->where('created_at', '<=', $request->sampai)
+        ->get();
+        $tanggalAwal = $request->dari;
+        $tanggalAkhir = $request->sampai;
+        return view ('/halamanVendorBill/index', [
+            'data'=>$data,
+            'tanggalAwal'=>$tanggalAwal,
+            'tanggalAkhir'=>$tanggalAkhir,
+            'filter' => true,
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

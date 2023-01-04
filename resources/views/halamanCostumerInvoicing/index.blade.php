@@ -29,7 +29,18 @@
     <div class="card">
     <div class="card-body">
     <div class="pull-left" style="margin-bottom:10px">
-        <strong>Data Costumer Invoicing</strong>
+        <form action="customerinvoice/filter">
+            @if ($filter == false)
+                <label for="dari" style="margin-right: 15px"><b>From</b></label><input type="date" name="dari" id="dari">
+                <label for="sampai" style="margin-right: 15px; margin-left: 15px"><b>To</b></label><input type="date" name="sampai" id="sampai">
+                <button class="btn btn-primary">Submit</button>
+            @else
+                <label for="dari" style="margin-right: 15px"><b>From</b></label><input type="date" name="dari" id="dari" value="{{ $tanggalAwal }}">
+                <label for="sampai" style="margin-right: 15px; margin-left: 15px"><b>To</b></label><input type="date" name="sampai" id="sampai" value="{{ $tanggalAkhir }}">
+                {{-- <button class="btn btn-primary">Submit</button>     --}}
+                <a href='/customerinvoice' class="btn btn-warning">Back</a>
+            @endif
+        </form>
     </div>
     <table class="table table-striped">
     <thead class="table-dark">
@@ -40,6 +51,7 @@
             <th>Produk`</th>
             <th>QTY</th>
             <th>Total Harga</th>
+            <th>Tanggal</th>
             <th>Status</th>
         </tr>
     </thead>
@@ -53,8 +65,8 @@
             <td>{{$data->produk}}</td>
             <td>{{$data->value}}</td>
             <td>{{$data->harga}}</td>
+            <td>{{$data->tanggal}}</td>
             <td>{{$data->status}}</td>
-            
         </tr>
     </div>
     @endforeach
